@@ -1,3 +1,5 @@
+var youtubeKey = config.YOUTUBE_API_KEY;
+
 window.addEventListener('DOMContentLoaded', function() {
     // your button here
     var link = document.getElementById('test');
