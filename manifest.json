@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Unfocus",
+    "version": "0.1.0",
+    "description": "Break from studying with short Youtube clips",
+    "background": {
+        "scripts": [
+            "./background.js"
+        ]
+    },
+    "options_page": "./options.html",
+    "browser_action": {
+        "default_popup": "./popup/popup.html"
+    },
+    "permissions": [
+
+    ]
+}
