@@ -1,5 +1,6 @@
 body {
-    background-color: beige;
+    background-color:#F8F2F2;
+    margin: 0;
 }
 
 button {
@@ -7,6 +8,41 @@ button {
 }
 
 .suggestion {
-    height: 55px;
+    height: 100%;
+    width: 380px;
+    padding: 7.5px;
+    background-color: red;
+    display: flex;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: darkgray;
+}
+
+.words {
+    background-color: green;
     width: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: bold;
+    height: 40%;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column-reverse;
+    /* justify-content: center;     */
+}
+
+.description {
+    height: 50%;
+}
+
+.divider {
+    height: 0px;
+    width: 100%;
+    border: 0.5px solid rgb(224, 224, 224);
 }
