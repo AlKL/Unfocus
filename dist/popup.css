@@ -5,3 +5,8 @@ body {
 button {
     padding: 30px;
 }
+
+.suggestion {
+    height: 55px;
+    width: 100%;
+}
