@@ -9,9 +9,9 @@ button {
 
 .suggestion {
     height: 100%;
-    width: 380px;
+    width: 500px;
     padding: 7.5px;
-    background-color: red;
+    background-color: yellow;
     display: flex;
     cursor: pointer;
 }
