@@ -1,8 +1,80 @@
+// document.querySelector('#sign-in').addEventListener('click', function () {
+//     chrome.runtime.sendMessage({ message: 'login' }, function (response) {
+//         if (response === 'success') {
+//             window.close(); 
+//         }
+//     });
+// });
+
+// document.querySelector('button').addEventListener('click', function () {
+//     chrome.runtime.sendMessage({ message: 'isUserSignedIn' }, function (response) {
+//         // alert(response);
+//     });
+// })
+
+
+// const CLIENT_ID = '912099096037-dqcnfr7r6na9gcj66p2k6k73s1ubf3i5.apps.googleusercontent.com'
+// const DISCOVERY_DOCS = 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
+// const SCOPES = 'https://www.googleapis.com/auth/youtube.readonly'
+
+// const authorizeButton = document.getElementById('authorize-button')
+// const signoutButton = document.getElementById('signout-button')
+
+// window.addEventListener('DOMContentLoaded', () => {
+//     onload="this.onload(){}";
+//     handleClientLoad();
+//     onreadystatechange="if (this.readyState === 'complete') this.onload()";
+// })
+
+// // Load auth2 library
+// const handleClientLoad = () => {
+//     gapi.load('client:auth2', initClient);
+// }
+
+// // Init API client library and sest up sign in listeners
+// function initClient() {
+//     gapi.client.init({
+//         disoveryDocs: DISCOVERY_DOCS,
+//         clientId: CLIENT_ID,
+//         scope: SCOPES
+//     }).then(() => {
+//         //Listen for sign in state changes
+//         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+//         // Handle initial sign in state
+//         updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+//         authorizeButton.onclick = handleAuthClick;
+//         signoutButton.onclick = handleSignoutClick;
+//     })
+// }
+
+// // Update UI sign in state changes
+// const updateSigninStatus = (isSignedIn) => {
+//     if (isSignedIn) {
+//         authorizeButton.style.display = 'none';
+//         signoutButton.style.display = 'block';
+//     } else {
+//         authorizeButton.style.display = 'block';
+//         signoutButton.style.display = 'none';
+//     }
+// }
+
+// function handleAuthClick() {
+//     gapi.auth2.getAuthInstance().signIn();
+// }
+
+// function handleSignoutClick() {
+//     gapi.auth2.getAuthInstance().signOut();
+// }
 
 window.addEventListener('DOMContentLoaded', function () {
     const cases = document.querySelector(".cases")
     var apiKey = config.YOUTUBE_API_KEY;
-    const apiCall = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&key=" + apiKey + "&type=video&maxResults=3&videoDuration=short";
+    const apiCall = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=' + apiKey;
+
+    //better search options
+
+    //First you'll need to display a sign-in button
+    //Once a user is logged in then we can show their videos
 
     const sugg1img = document.querySelector("#sugg1 img");
     const sugg1title = document.querySelector("#title1");
@@ -17,7 +89,6 @@ window.addEventListener('DOMContentLoaded', function () {
     var sugg1 = document.getElementById("sugg1");
     var sugg2 = document.getElementById("sugg2");
     var sugg3 = document.getElementById("sugg3");
-
 
     fetch(apiCall)
         .then(res => {

@@ -1,3 +1,8 @@
+/* #authorize-button,
+#signout-button {
+    display: none;
+} */
+
 body {
     background-color:#F8F2F2;
     margin: 0;
@@ -34,7 +39,6 @@ button {
     padding-bottom: 5px;
     display: flex;
     flex-direction: column-reverse;
-    /* justify-content: center;     */
 }
 
 .description {
