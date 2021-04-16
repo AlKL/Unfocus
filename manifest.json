@@ -3,22 +3,12 @@
     "name": "Unfocus",
     "version": "0.1.0",
     "description": "Break from studying with short Youtube clips",
-    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgR3LWitFEEk3yghyjJLE7JqAt+94vcYoRyoyYdio9b1k+mrF3zdq9oLAJPy23lb4NIBowi/PFfXK56mvqdQMjBiBpVKJQZFdsg1Dxcp4LE1Mk629SLlUHkarkznaxtVsUxtRKPqoqaJ6aBibCNhxbi0O+ZqrNNAbLbDAPGlwp+91QvpHerjwjdVBudQ9US2mTk9jzFEzcl8GgdvTCec4A/J4+5ymQBYlg3YkLVWnS0GfojOykYVUWqv2jZYqcldBYGU4yZq9sFIg3f83ys7GmtQQgrF1vE9/g5sX9gyJd2owN+XIgBTRLsKcXEBDwA/JHD3rGXFkG0UJmkOH78t8QIDAQAB",
-    "background": {
-        "scripts": [
-            "./background.js",
-            "./jsrsasign-all-min.js"
-        ]
-    },
     "browser_action": {
         "default_popup": "./dist/popup.html"
     },
-    "options_page": "./options.html",
+    "options_page": "./dist/options.html",
     "permissions": [
-        "identity",
         "<all_urls>", 
-        "*://apis.google.com/*",
         "storage"
-    ],
-    "content_security_policy": "script-src 'self' https://apis.google.com/js/api.js; object-src 'self'"
-} 
+    ]
+}

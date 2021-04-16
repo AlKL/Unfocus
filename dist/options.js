@@ -2,7 +2,7 @@ var list = document.getElementById('current-channels-list');
 var addButton = document.getElementById('add-button');
 var input = document.getElementById('input-field');
 
-var apiKey = config.YOUTUBE_API_KEY2;
+var apiKey = config.YOUTUBE_API_KEY4;
 
 window.onload = () => {
     let index = 0;

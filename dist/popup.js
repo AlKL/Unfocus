@@ -4,7 +4,7 @@ function getRandomInt(max) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    var apiKey = config.YOUTUBE_API_KEY2;
+    var apiKey = config.YOUTUBE_API_KEY4;
 
     const sugg1img = document.querySelector("#sugg1 img");
     const sugg1title = document.querySelector("#title1");
@@ -57,6 +57,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
                 if (res.status !== 200) {
+                    loadingText.className = "ooQuota";
                     sugg1title.textContent = 'Status return error (not 200/400)';
                     sugg1img.src = "../images/error.png";
                     return;
