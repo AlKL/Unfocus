@@ -2,7 +2,7 @@ var list = document.getElementById('current-channels-list');
 var addButton = document.getElementById('add-button');
 var input = document.getElementById('input-field');
 
-var apiKey = config.YOUTUBE_API_KEY;
+var apiKey = config.YOUTUBE_API_KEY2;
 
 window.onload = () => {
     let index = 0;
@@ -16,13 +16,13 @@ window.onload = () => {
             list.appendChild(li);
 
             // amends API call based on channel name
-            const apiCall = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=' + element + '&maxResults=1&fields=items(snippet%2FchannelTitle)&key=' + apiKey;
+            const apiCall = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=' + element + '&fields=items%2Fsnippet%2Ftitle&key=' + apiKey;
 
             // fetch channel title from channel id
             fetch(apiCall)
                 .then(res => {
                     res.json().then(apiData => {
-                        li.innerHTML = apiData.items[0].snippet.channelTitle + "  ";
+                        li.innerHTML = apiData.items[0].snippet.title + "  ";
                         // delete button for each element
                         var deleteButton = document.createElement('button');
                         deleteButton.innerHTML = 'Remove';
