@@ -6,8 +6,6 @@ function getRandomInt(max) {
 window.addEventListener('DOMContentLoaded', function () {
     var apiKey = config.YOUTUBE_API_KEY2;
 
-    const cases = document.querySelector(".cases")
-
     const sugg1img = document.querySelector("#sugg1 img");
     const sugg1title = document.querySelector("#title1");
     const sugg1desc = document.querySelector("#desc1");
@@ -16,7 +14,13 @@ window.addEventListener('DOMContentLoaded', function () {
     const sugg2desc = document.querySelector("#desc2")
     const sugg3img = document.querySelector("#sugg3 img");
     const sugg3title = document.querySelector("#title3");
-    const sugg3desc = document.querySelector("#desc3")
+    const sugg3desc = document.querySelector("#desc3");
+
+    const suggImage1 = document.querySelector('.suggImage1');
+    const suggImage2 = document.querySelector('.suggImage2');
+    const suggImage3 = document.querySelector('.suggImage3');
+
+    const loadingText = document.querySelector('.loading');
 
     var sugg1 = document.getElementById("sugg1");
     var sugg2 = document.getElementById("sugg2");
@@ -26,9 +30,7 @@ window.addEventListener('DOMContentLoaded', function () {
     var sortCategories = ["date", "rating", "relevance", "title", "viewCount", "viewCount"];
 
     chrome.storage.sync.get({ list: [] }, (data) => {
-
         var storedChannelIds = data.list;
-        // cases.textContent = storedChannelIds;
 
         var randomCatIndex = getRandomInt(sortCategories.length);
         var randomVidIndex = [getRandomInt(25), getRandomInt(25), getRandomInt(25)];
@@ -46,12 +48,22 @@ window.addEventListener('DOMContentLoaded', function () {
 
         fetch(getApiString(0))
             .then(res => {
+                if (res.status === 403) {
+                    loadingText.className = "ooQuota";
+                    sugg1title.textContent = 'I am out of Youtube API quota, pending increase.';
+                    sugg1img.src = "../images/error.png";
+                    sugg2.className = "ooQuota";
+                    sugg3.className = "ooQuota";
+                    return;
+                }
                 if (res.status !== 200) {
-                    sugg1title.textContent = 'Status return error (not 200)';
+                    sugg1title.textContent = 'Status return error (not 200/400)';
                     sugg1img.src = "../images/error.png";
                     return;
                 }
                 res.json().then(data => {
+                    loadingText.className = "ooQuota";
+                    suggImage1.className = "";
                     sugg1img.src = data.items[randomVidIndex[0]].snippet.thumbnails.default.url;
                     sugg1title.textContent = data.items[randomVidIndex[0]].snippet.title;
                     sugg1desc.textContent = data.items[randomVidIndex[0]].snippet.description;
@@ -64,11 +76,12 @@ window.addEventListener('DOMContentLoaded', function () {
         fetch(getApiString(1))
             .then(res => {
                 if (res.status !== 200) {
-                    sugg2title.textContent = 'Status return error (not 200)';
+                    sugg2title.textContent = 'Status return error (not 200/400)';
                     sugg2img.src = "../images/error.png";
                     return;
                 }
                 res.json().then(data => {
+                    suggImage2.className = "";
                     sugg2img.src = data.items[randomVidIndex[1]].snippet.thumbnails.default.url;
                     sugg2title.textContent = data.items[randomVidIndex[1]].snippet.title;
                     sugg2desc.textContent = data.items[randomVidIndex[1]].snippet.description;
@@ -81,11 +94,12 @@ window.addEventListener('DOMContentLoaded', function () {
         fetch(getApiString(2))
             .then(res => {
                 if (res.status !== 200) {
-                    sugg3title.textContent = 'Status return error (not 200)';
+                    sugg3title.textContent = 'Status return error (not 200/400)';
                     sugg3img.src = "../images/error.png";
                     return;
                 }
                 res.json().then(data => {
+                    suggImage3.className = "";
                     sugg3img.src = data.items[randomVidIndex[2]].snippet.thumbnails.default.url;
                     sugg3title.textContent = data.items[randomVidIndex[2]].snippet.title;
                     sugg3desc.textContent = data.items[randomVidIndex[2]].snippet.description;
