@@ -2,6 +2,8 @@ var list = document.getElementById('current-channels-list');
 var addButton = document.getElementById('add-button');
 var input = document.getElementById('input-field');
 
+var apiKey = config.YOUTUBE_API_KEY;
+
 window.onload = () => {
     let index = 0;
 
@@ -12,19 +14,30 @@ window.onload = () => {
             let thisIndex = index;
             var li = document.createElement('li');
             list.appendChild(li);
-            li.innerHTML = element + "  ";
 
-            // delete button for each element
-            var deleteButton = document.createElement('button');
-            deleteButton.innerHTML = 'Remove';
-            deleteButton.addEventListener('click', () => {
-                data.list.splice(thisIndex - 1, 1);
-                chrome.storage.sync.set({ list: data.list }, () => {
-                    console.log("removed item");
+            // amends API call based on channel name
+            const apiCall = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=' + element + '&maxResults=1&fields=items(snippet%2FchannelTitle)&key=' + apiKey;
+
+            // fetch channel title from channel id
+            fetch(apiCall)
+                .then(res => {
+                    res.json().then(apiData => {
+                        li.innerHTML = apiData.items[0].snippet.channelTitle + "  ";
+                        // delete button for each element
+                        var deleteButton = document.createElement('button');
+                        deleteButton.innerHTML = 'Remove';
+                        deleteButton.addEventListener('click', () => {
+                            data.list.splice(thisIndex - 1, 1);
+                            chrome.storage.sync.set({ list: data.list }, () => {
+                                console.log("removed item");
+                            })
+                        })
+                        li.appendChild(deleteButton);
+                    })
                 })
-            })
-            li.appendChild(deleteButton);
-            // console.log(element);
+                .catch(() => {
+                    console.log('Error getting title');
+                })
         });
     })
 
@@ -38,10 +51,15 @@ window.onload = () => {
         const update = (array) => {
             if (input.value.includes('channel') && input.value.includes('youtube')) {
                 var channelId = input.value.slice(input.value.lastIndexOf('/') + 1);
-                array.push(channelId);
-                chrome.storage.sync.set({ list: array }, () => {
-                    console.log("updated list");
-                })
+
+                if (array.includes(channelId)) {
+                    alert('Channel already exists on list')
+                } else {
+                    array.push(channelId);
+                    chrome.storage.sync.set({ list: array }, () => {
+                        console.log("updated list");
+                    })
+                }
             } else {
                 alert('Please enter a valid youtube channel')
             }

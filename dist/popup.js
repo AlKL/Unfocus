@@ -67,14 +67,14 @@
 // }
 
 window.addEventListener('DOMContentLoaded', function () {
-    const cases = document.querySelector(".cases")
     var apiKey = config.YOUTUBE_API_KEY;
-    const apiCall = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=' + apiKey;
 
-    //better search options
+    
 
-    //First you'll need to display a sign-in button
-    //Once a user is logged in then we can show their videos
+
+    const apiCall = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UCWiY6fYdxuEe78r-0uFCnhA&maxResults=3&fields=(items%2Fsnippet%2Fthumbnails%2Fdefault%2Furl)%2C%20(items%2Fsnippet%2Ftitle)%2C%20(items%2Fsnippet%2Fdescription)%2C%20(items%2Fid%2FvideoId)&key=' + apiKey;
+
+    const cases = document.querySelector(".cases")
 
     const sugg1img = document.querySelector("#sugg1 img");
     const sugg1title = document.querySelector("#title1");
@@ -89,6 +89,25 @@ window.addEventListener('DOMContentLoaded', function () {
     var sugg1 = document.getElementById("sugg1");
     var sugg2 = document.getElementById("sugg2");
     var sugg3 = document.getElementById("sugg3");
+
+
+    //(items/snippet/thumbnails/default/url), (items/snippet/title), (items/snippet/description), (items/id/videoId)
+
+    var sortCategories = ["date", "rating", "relevance", "title", "videoCount", "viewCount"];
+    var randomCatIndex; // between 0 and 5
+    var randomChannelIndex; // between 0 and video list length - 1
+    var randomVidIndex; // between 0 and 24
+
+
+
+    chrome.storage.sync.get({ list: [] }, (data) => {
+        console.log(data.list);
+        cases.textContent = data.list;
+
+        
+
+    })
+
 
     fetch(apiCall)
         .then(res => {
