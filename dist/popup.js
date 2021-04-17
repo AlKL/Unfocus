@@ -4,7 +4,7 @@ function getRandomInt(max) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    var apiKey = config.YOUTUBE_API_KEY5;
+    var apiKey = config.YOUTUBE_API_KEY;
 
     const sugg1img = document.querySelector("#sugg1 img");
     const sugg1title = document.querySelector("#title1");

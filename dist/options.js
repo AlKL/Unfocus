@@ -3,7 +3,7 @@ var addButton = document.getElementById('add-button');
 var input = document.getElementById('input-field');
 var listError = document.getElementById('listError');
 
-var apiKey = config.YOUTUBE_API_KEY5;
+var apiKey = config.YOUTUBE_API_KEY;
 
 window.onload = () => {
     let index = 0;
