@@ -4,7 +4,7 @@ function getRandomInt(max) {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-    var apiKey = config.YOUTUBE_API_KEY4;
+    var apiKey = config.YOUTUBE_API_KEY5;
 
     const sugg1img = document.querySelector("#sugg1 img");
     const sugg1title = document.querySelector("#title1");
@@ -76,6 +76,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
         fetch(getApiString(1))
             .then(res => {
+                if (res.status === 403) {
+                    loadingText.className = "ooQuota";
+                    sugg1title.textContent = 'I am out of Youtube API quota, pending increase.';
+                    sugg1img.src = "../images/error.png";
+                    sugg2.className = "ooQuota";
+                    sugg3.className = "ooQuota";
+                    return;
+                }
                 if (res.status !== 200) {
                     sugg2title.textContent = 'Status return error (not 200/400)';
                     sugg2img.src = "../images/error.png";
@@ -94,6 +102,14 @@ window.addEventListener('DOMContentLoaded', function () {
 
         fetch(getApiString(2))
             .then(res => {
+                if (res.status === 403) {
+                    loadingText.className = "ooQuota";
+                    sugg1title.textContent = 'I am out of Youtube API quota, pending increase.';
+                    sugg1img.src = "../images/error.png";
+                    sugg2.className = "ooQuota";
+                    sugg3.className = "ooQuota";
+                    return;
+                }
                 if (res.status !== 200) {
                     sugg3title.textContent = 'Status return error (not 200/400)';
                     sugg3img.src = "../images/error.png";

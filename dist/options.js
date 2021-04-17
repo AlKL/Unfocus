@@ -1,8 +1,9 @@
 var list = document.getElementById('current-channels-list');
 var addButton = document.getElementById('add-button');
 var input = document.getElementById('input-field');
+var listError = document.getElementById('listError');
 
-var apiKey = config.YOUTUBE_API_KEY4;
+var apiKey = config.YOUTUBE_API_KEY5;
 
 window.onload = () => {
     let index = 0;
@@ -13,7 +14,6 @@ window.onload = () => {
             index++;
             let thisIndex = index;
             var li = document.createElement('li');
-            list.appendChild(li);
 
             // amends API call based on channel name
             const apiCall = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=' + element + '&fields=items%2Fsnippet%2Ftitle&key=' + apiKey;
@@ -21,19 +21,31 @@ window.onload = () => {
             // fetch channel title from channel id
             fetch(apiCall)
                 .then(res => {
-                    res.json().then(apiData => {
-                        li.innerHTML = apiData.items[0].snippet.title + "  ";
-                        // delete button for each element
-                        var deleteButton = document.createElement('button');
-                        deleteButton.innerHTML = 'Remove';
-                        deleteButton.addEventListener('click', () => {
-                            data.list.splice(thisIndex - 1, 1);
-                            chrome.storage.sync.set({ list: data.list }, () => {
-                                console.log("removed item");
+                    if (res.status === 403) {
+                        listError.textContent = "I am out of API Quota, pending increase."
+                        return;
+                    }
+                    if (res.status !== 200) {
+                        listError.textContent = "Error generating list."
+                        return;
+                    }
+                    if (res.status === 200) {
+                        res.json().then(apiData => {
+                            list.appendChild(li);
+                            listError.className = "listErrorNone";
+                            li.innerHTML = apiData.items[0].snippet.title + "  ";
+                            // delete button for each element
+                            var deleteButton = document.createElement('button');
+                            deleteButton.innerHTML = 'Remove';
+                            deleteButton.addEventListener('click', () => {
+                                data.list.splice(thisIndex - 1, 1);
+                                chrome.storage.sync.set({ list: data.list }, () => {
+                                    console.log("removed item");
+                                })
                             })
+                            li.appendChild(deleteButton);
                         })
-                        li.appendChild(deleteButton);
-                    })
+                    }
                 })
                 .catch(() => {
                     console.log('Error getting title');

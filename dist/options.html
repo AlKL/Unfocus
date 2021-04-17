@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="options.css" />
 
     <title>Unfocus - Options page</title>
 </head>
@@ -14,6 +15,7 @@
 
     <form>
         <h2>Add a channel:</h2>
+        <p>For example <span><a href="https://www.youtube.com/channel/UCdC0An4ZPNr_YiFiYoVbwaw">https://www.youtube.com/channel/UCdC0An4ZPNr_YiFiYoVbwaw</a></span></p>
         <input type="text" id="input-field">
         <button id="add-button">Add</button>
     </form>
@@ -21,6 +23,7 @@
     <div class="current-channels">
         <h2>Channel list:</h2>
         <ul id="current-channels-list"></ul>
+        <p id="listError"></p>
     </div>
     
     <script src="../config.js"></script>

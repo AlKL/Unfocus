@@ -1,0 +1,20 @@
+span {
+    font-style: italic;
+    color: forestgreen;
+}
+
+a:visited,
+a:link,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: forestgreen;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.listErrorNone {
+    display: none;
+}
