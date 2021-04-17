@@ -58,8 +58,11 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
                 if (res.status !== 200) {
                     loadingText.className = "ooQuota";
-                    sugg1title.textContent = 'Status return error (not 200/400)';
+                    sugg1title.textContent = 'You need to add channels to your channel list.';
+                    sugg1desc.textContent = 'Right click on the extension icon and click options.'
                     sugg1img.src = "../images/error.png";
+                    sugg2.className = "ooQuota";
+                    sugg3.className = "ooQuota";
                     return;
                 }
                 res.json().then(data => {

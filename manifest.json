@@ -1,14 +1,15 @@
 {
     "manifest_version": 2,
     "name": "Unfocus",
-    "version": "0.1.0",
-    "description": "Break from studying with short Youtube clips",
+    "version": "1.0.0",
+    "description": "Break from studying with Youtube clips",
     "icons": {
         "16": "./images/icon16.png",
         "48": "./images/icon48.png",
         "128": "./images/icon128.png"
     },
     "browser_action": {
+        "default_icon": "./images/icon16.png",
         "default_popup": "./dist/popup.html"
     },
     "options_page": "./dist/options.html",
