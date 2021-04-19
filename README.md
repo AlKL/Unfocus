@@ -3,8 +3,7 @@
 Unfocus is a chrome extension that can be found on the Google Web Store. It's purpose is to help increase your productivity in the long-run by decreasing your productivity for with a quick video break. Instead of having to browse through your YouTube frontpage with potential to go into a video rabbit-hole, you can simply add the channels you want to query into the Options page. Once you click on the extension, three random videos from your channel list will populate.
 
 ## Link:
-
-PENDING...
+https://chrome.google.com/webstore/detail/unfocus/mbjligkbikiipbmfhipdppcfahbeghhe?hl=en
 
 ## How to run:
 * Right click on the chrome extension and click Options
