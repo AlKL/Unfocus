@@ -5,7 +5,7 @@ Unfocus is a chrome extension that can be found on the Google Web Store. It's pu
 ## Link:
 https://chrome.google.com/webstore/detail/unfocus/mbjligkbikiipbmfhipdppcfahbeghhe?hl=en
 
-## How to run:
+## Getting started:
 * Right click on the chrome extension and click Options
 * Add channels that you want on your list. Channels must be in the following format: https://www.youtube.com/channel/UCdC0An4ZPNr_YiFiYoVbwaw 
 * Click on the chrome extension again to view your generated videos
